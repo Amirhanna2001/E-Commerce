@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using E_Commerce.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.Data
@@ -9,5 +10,7 @@ namespace E_Commerce.Data
             : base(options)
         {
         }
+        //public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
