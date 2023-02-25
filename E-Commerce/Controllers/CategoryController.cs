@@ -78,6 +78,15 @@ namespace E_Commerce.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            Category category = await _context.Categories.FindAsync(id);
+            if (category == null) return NotFound();
 
+
+            return View(category);//To Go To Details.cshtml View
+        }
+       
     }
 }

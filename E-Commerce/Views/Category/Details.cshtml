@@ -1,0 +1,12 @@
+﻿@model Category
+@{
+        ViewData["Title"] = "Details";
+
+}
+<label asp-for="Name" ></label>
+<input asp-for="Name" disabled/>
+
+<label asp-for="Description"></label>
+<p asp-for="Description" > @Model.Description</p>
+
+<a class="btn btn-primary" asp-action="Index">الرئيسية</a>

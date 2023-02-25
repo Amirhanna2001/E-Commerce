@@ -15,7 +15,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">الاسم</th>
-              <th scope="col">التفاصيل</th>
+              @*<th scope="col">التفاصيل</th>*@
               <th scope="col">العمليات</th>
             </tr>
           </thead>
@@ -26,7 +26,7 @@
             <tr>
                 <th scope="row">@j</th>
                 <td>@Model[i].Name</td>
-                <td>@Model[i].Description</td>
+                @*<td>@Model[i].Description</td>*@
                 <td>
                      <a onclick="return confirm('R U sure' )"
                                                 class="btn btn-danger" 
@@ -34,6 +34,7 @@
                                                 حذف
                                             </a> 
                     <a class="btn btn-primary" asp-route-id="@Model[i].CategoryId" asp-action="Edite">تعديل</a> 
+                    <a class="btn btn-primary"asp-action="Details" asp-route-id="@Model[i].CategoryId">التفاصيل</a> 
                     <a class="btn btn-primary" asp-route-id="@Model[i].CategoryId">عرض المنتجات</a> 
                 </td>
             </tr>
