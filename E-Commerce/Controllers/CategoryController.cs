@@ -40,5 +40,44 @@ namespace E_Commerce.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            Category cat = await _context.Categories.FindAsync(id);
+            if (cat == null)
+                return NotFound();
+
+            _context.Categories.Remove(cat);
+            _context.SaveChanges();//To Delete It From Database
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edite(int id)
+        {
+            Category category =await _context.Categories.FindAsync(id);
+            if (category == null) return NotFound();
+
+
+            return View(category);//To Go To Details.cshtml View
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edite(Category category)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction(nameof(Index));
+            if (category == null)
+                return BadRequest();
+
+            if(await _context.Categories.AnyAsync(c=>c.Name == category.Name))
+            {
+                ModelState.AddModelError("Name", "العرض موجود بالفعل");
+                return View(category);
+            }
+
+             _context.Categories.Update(category);
+             _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
