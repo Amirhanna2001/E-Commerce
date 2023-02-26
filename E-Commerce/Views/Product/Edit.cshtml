@@ -1,0 +1,81 @@
+﻿@model CreateProductViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<h2>Edit Product</h2>
+<hr />
+
+<section class="row justify-content-between">
+    <div class="col-md-4" >
+        <form method="post" enctype="multipart/form-data" asp-controller="Product" asp-action="Create">
+            <input type="hidden" asp-for="ProductId" />
+            <input type="hidden"  />
+            <div class="form-group">
+                <label  asp-for="Name"></label>
+                <input asp-for="Name" maxlength="250"  type="text" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  asp-for="Brand"></label>
+                <input asp-for="Brand"  type="text" class="form-control"/>
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  asp-for="Price"></label>
+                 <input asp-for="Price" class="form-control" >
+
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  asp-for="Quantity"></label>
+                 <input asp-for="Quantity" class="form-control" >
+
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  asp-for="CategoryId">Category Name</label>
+                 <select class="form-control" asp-for="CategoryId" 
+                        asp-items="@(new SelectList(Model.Categories,"CategoryId","Name"))">
+                        <option></option>
+                    </select>
+                        
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  asp-for="Description"></label>
+                 <textarea asp-for="Description" class="form-control" maxlength="2500" rows="5">
+
+                 </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            
+           <div class="custom-file">
+                <input type="file" class="form-control" asp-for="Image" />
+                <label class="form-control" asp-for="Image"></label>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">
+                    Add</button>
+                <a asp-action="index" class="btn btn-primary">
+                    <i class="bi bi-x-circle-fill"></i> Cancel</a>
+            </div>
+
+        </form>
+    </div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+        $(document).ready(function () {
+            $('#Poster').on('change', function () {
+                var selectedFile = $(this).val().split('\\').pop();
+                $(this).siblings('label').text(selectedFile);
+                var posterContainer = $('#poster-container');
+                var image = window.URL.createObjectURL(this.files[0]);
+                posterContainer.removeClass('d-none');
+                posterContainer.find('img').attr('src', image);
+            });
+        });
+    </script>
+}
